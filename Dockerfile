@@ -1,5 +1,5 @@
 # Use an official Python runtime as a base image
-FROM python:2.7
+FROM python:3.6.6-stretch
 
 # Set the working directory to /app
 WORKDIR /app
@@ -7,14 +7,15 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 ADD . /app
 
-# Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
+# Install any needed packages specified in Pipfile
+RUN pip install pipenv
+RUN pipenv install
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
+# Make port 5000 available to the world outside this container
+EXPOSE 5000
 
-# Define environment variable
-ENV NAME World
+# Define the Flask entrypoint
+ENV FLASK_APP app.py
 
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+# Run Flask development application server for now
+CMD ["pipenv", "run", "flask", "run"]

@@ -1,2 +1,8 @@
 env/*
 .idea/*
+
+# Python
+.virtualenv/
+Pipfile
+Pipfile.lock
+__pycache__/
