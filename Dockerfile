@@ -1,5 +1,5 @@
 # Use an official Python runtime as a base image
-FROM python:3.6.6-stretch
+FROM python:3.7.7-stretch
 
 # Set the working directory to /app
 WORKDIR /app
@@ -17,5 +17,5 @@ EXPOSE 5000
 # Define the Flask entrypoint
 ENV FLASK_APP app.py
 
-# Run Flask development application server for now
-CMD ["pipenv", "run", "flask", "run"]
+# Run Flask using gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "wsgi:application"]
